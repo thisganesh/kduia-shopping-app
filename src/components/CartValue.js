@@ -3,14 +3,38 @@ import { AppContext } from '../context/AppContext';
 
 const CartValue = () => {
     const { expenses, Location } = useContext(AppContext);
-    const totalExpenses = expenses.reduce((total, item) => {
-        return (total += (item.unitprice * item.quantity));
+    const Budget =2000;
+    
+    const spent_so_far = expenses.reduce((total, item) => {
+         let prev = total
+        total += item.budget;
+        let exceed = 0;
+        if(total>Budget){
+            window.alert(`The value cannot exceed remaining funds: ${Location}${Budget - prev}`);
+            exceed = 1
+        }
+        if(exceed===1) total= prev
+        return (total );
     }, 0);
 
+   
+
     return (
-        <div className='alert alert-primary'>
-            <span>Cart Value: {Location}{totalExpenses}</span>
+        <>
+        <div style={{display:'flex',padding:'1rem'}}>
+            <div className='alert alert-secondary' style={{ marginRight: '1rem' }}>
+                <span>Budget: {Location}{Budget}</span>
+            </div>
+
+            <div className='alert alert-success' style={{ marginRight: '1rem' }}>
+                <span>Remaining: {Location}{Budget-spent_so_far}</span>
+            </div>
+
+            <div className='alert alert-primary'>
+                <span>Spent so far: {Location}{spent_so_far}</span>
+            </div>
         </div>
+        </>
     );
 };
 

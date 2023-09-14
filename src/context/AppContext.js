@@ -8,7 +8,7 @@ export const AppReducer = (state, action) => {
             let updatedqty = false;
             state.expenses.map((expense)=>{
                 if(expense.name === action.payload.name) {
-                    expense.quantity = expense.quantity + action.payload.quantity;
+                    expense.budget = expense.budget + action.payload.budget;
                     updatedqty = true;
                 }
                 new_expenses.push(expense);
@@ -23,9 +23,9 @@ export const AppReducer = (state, action) => {
             case 'RED_QUANTITY':
                 state.expenses.map((expense)=>{
                     if(expense.name === action.payload.name) {
-                        expense.quantity = expense.quantity - action.payload.quantity;
+                        expense.budget = expense.budget - action.payload.budget;
                     }
-                    expense.quantity = expense.quantity < 0 ? 0: expense.quantity;
+                    expense.budget = expense.budget < 0 ? 0: expense.budget;
                     new_expenses.push(expense);
                     return true;
                 })
@@ -37,7 +37,7 @@ export const AppReducer = (state, action) => {
         case 'DELETE_ITEM':
             state.expenses.map((expense)=>{
                 if(expense.name === action.payload.name) {
-                    expense.quantity = 0;
+                    expense.budget = 0;
                 }
                 new_expenses.push(expense);
                 return true;
@@ -62,11 +62,11 @@ export const AppReducer = (state, action) => {
 // 1. Sets the initial state when the app loads
 const initialState = {
     expenses: [
-        { id: "Shirt", name: 'Shirt', quantity: 0, unitprice: 500 },
-        { id: "Jeans", name: 'Jeans', quantity: 0, unitprice: 300 },
-        { id: "Dress", name: 'Dress', quantity: 0, unitprice: 400 },
-        { id: "Dinner set", name: 'Dinner set', quantity: 0, unitprice: 600 },
-        { id: "Bags", name: 'Bags', quantity: 0, unitprice: 200 },
+        { id: "Marketing", name: 'Marketing', budget: 50, unitprice: 500 },
+        { id: "Finance", name: 'Finance', budget: 300, unitprice: 300 },
+        { id: "Sales", name: 'Sales', budget: 40, unitprice: 400 },
+        { id: "Human Resource", name: 'Human Resource', budget: 70, unitprice: 600 },
+        { id: "IT", name: 'IT', budget: 500, unitprice: 200 },
     ],
     Location: '£'
 };
@@ -81,7 +81,7 @@ export const AppProvider = (props) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     const totalExpenses = state.expenses.reduce((total, item) => {
-        return (total = total + (item.unitprice*item.quantity));
+        return (total = 2000);
     }, 0);
 state.CartValue = totalExpenses;
 

@@ -13,7 +13,19 @@ const ExpenseItem = (props) => {
         };
 
         dispatch({
-            type: 'DELETE_ITEM',
+            type: 'RED10',
+            payload: item,
+        });
+    };
+
+
+    const handleAddItem = () => {
+        const item = {
+            name: props.name,
+        };
+
+        dispatch({
+            type: 'ADD10',
             payload: item,
         });
     };
@@ -24,8 +36,8 @@ const ExpenseItem = (props) => {
         <td>{props.name}</td>
         <td>{Location}{props.budget}</td>
         {/* <td><FaTimesCircle size='2.2em' color="green" onClick={handleDeleteItem}></FaTimesCircle></td> */}
-        <td><FaPlusCircle size={32} color="green" /> </td>
-        <td><FaMinusCircle size={32} color="red" /></td>
+        <td><FaPlusCircle size={32} color="green" onClick={handleAddItem}/> </td>
+        <td><FaMinusCircle size={32} color="red" onClick={handleDeleteItem}/></td>
         </tr>
     );
 };

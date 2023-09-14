@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const ItemSelected = (props) => {
-    const { dispatch} = useContext(AppContext);
+    const { dispatch,Location} = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [budget, setBudget] = useState('');
@@ -47,6 +47,7 @@ const ItemSelected = (props) => {
                   </select>
 
                     <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
+                       
                 <label className="input-group-text" htmlFor="inputGroupSelect02">Allocation</label>
                 </div>
                   <select className="custom-select" id="inputGroupSelect02" onChange={(event) => setAction(event.target.value)}>
@@ -54,7 +55,7 @@ const ItemSelected = (props) => {
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>  
                   <span className="eco" style={{ marginLeft: '2rem', marginRight: '8px'}}></span>
-
+                  <span>{Location}</span>
                     <input
                         required='required'
                         type='number'

@@ -54,6 +54,37 @@ export const AppReducer = (state, action) => {
                 ...state
             }
 
+    case 'ADD10':
+        state.expenses.map((expense)=>{
+            if(expense.name === action.payload.name) {
+                expense.budget = expense.budget + 10;
+               
+            }
+            new_expenses.push(expense);
+            return true;
+        })
+        state.expenses = new_expenses;
+        action.type = "DONE";
+        return {
+            ...state,
+        };
+
+    case 'RED10':
+        state.expenses.map((expense)=>{
+            if(expense.name === action.payload.name) {
+                expense.budget = expense.budget - 10;
+            }
+            expense.budget = expense.budget < 0 ? 0: expense.budget;
+            new_expenses.push(expense);
+            return true;
+        })
+        state.expenses = new_expenses;
+        action.type = "DONE";
+        return {
+            ...state,
+        };
+
+
         default:
             return state;
     }
